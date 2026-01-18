@@ -36,10 +36,10 @@ const JobDetails = () => {
                 <section className="mb-16">
                     <h2 className="text-2xl font-bold mb-6">Job Description</h2>
                     <p className="text-gray-300 leading-relaxed text-lg">
-                        We are looking for a passionate Software Developer to join our crew at Made of Curiosity.
-                        In this role, you will be exploring the edges of technology, building seamless digital experiences,
-                        and contributing to our mission of creating the infinite canvas. You will work closely with designers
-                        and other developers to bring creative visions to life.
+                        We are looking for a self-driven Software Developer who thrives on building things from scratch.
+                        In this role, you'll be taking complete ownership of projects, exploring cutting-edge technologies,
+                        and turning ideas into production-ready applications. You'll work independently while collaborating
+                        with the team to ship products that matter.
                     </p>
                 </section>
 
@@ -47,12 +47,14 @@ const JobDetails = () => {
                 <section className="mb-16">
                     <h2 className="text-2xl font-bold mb-6">Responsibilities</h2>
                     <ul className="list-disc list-outside ml-6 space-y-3 text-gray-300 text-lg">
-                        <li>Develop and maintain high-quality user interfaces using React, Vite, and Tailwind CSS.</li>
-                        <li>Collaborate with cross-functional teams to define, design, and ship new features.</li>
-                        <li>Write clean, scalable, and reusable code.</li>
-                        <li>Optimize applications for maximum speed and scalability.</li>
-                        <li>Troubleshoot and debug issues across different browsers and devices.</li>
-                        <li>Stay up-to-date with emerging technologies and industry trends.</li>
+                        <li>Take full ownership of projects from concept to deployment, handling both frontend and backend development.</li>
+                        <li>Build and ship complete applications across web and mobile platforms.</li>
+                        <li>Explore and integrate emerging technologies and frameworks to solve problems creatively.</li>
+                        <li>Deploy applications to cloud platforms and manage app store releases (Google Play Store, Apple App Store).</li>
+                        <li>Leverage AI coding tools to accelerate development and improve code quality.</li>
+                        <li>Debug, optimize, and scale applications for real-world usage.</li>
+                        <li>Figure things out independently when facing new challenges or unfamiliar territory.</li>
+                        <li>Stay current with industry trends and proactively suggest improvements to our tech stack.</li>
                     </ul>
                 </section>
 
@@ -60,21 +62,59 @@ const JobDetails = () => {
                 <section className="mb-16">
                     <h2 className="text-2xl font-bold mb-6">Requirements</h2>
                     <ul className="list-disc list-outside ml-6 space-y-3 text-gray-300 text-lg">
-                        <li>Proven experience as a Software Developer or similar role.</li>
-                        <li>Strong proficiency in JavaScript (ES6+), React.js, and modern CSS frameworks (Tailwind).</li>
-                        <li>Experience with state management and routing libraries.</li>
-                        <li>Familiarity with Git and version control workflows.</li>
-                        <li>Excellent problem-solving skills and attention to detail.</li>
-                        <li>Strong communication skills and ability to work in a team environment.</li>
-                        <li>A passion for creativity and building unique digital experiences.</li>
+                        <li>Proven experience building and shipping complete projects (personal projects, side hustles, or professional work count).</li>
+                        <li>Strong proficiency in modern frontend frameworks (React, Vue, Next.js, or similar).</li>
+                        <li>Experience with Flutter for cross-platform mobile development.</li>
+                        <li>Solid understanding of backend services and APIs (Node.js, Python, Go, or similar).</li>
+                        <li>Experience with cloud hosting platforms (AWS, GCP, Vercel, Railway, or similar).</li>
+                        <li>Hands-on experience deploying apps to Google Play Store and Apple App Store.</li>
+                        <li>Proficient with AI-assisted coding tools (GitHub Copilot, Cursor, Claude, or similar).</li>
+                        <li>Experience with state management, routing, and common development patterns.</li>
+                        <li>Track record of personal or hobby projects that demonstrate initiative and technical range.</li>
+                        <li>Pro-active mindset - you see problems and solve them without waiting to be told.</li>
+                        <li>Strong problem-solving skills and the ability to figure things out independently.</li>
+                        <li>Comfortable with ambiguity and rapid iteration.</li>
                     </ul>
+                </section>
+
+                {/* What Sets You Apart */}
+                <section className="mb-16">
+                    <h2 className="text-2xl font-bold mb-6">What Sets You Apart</h2>
+                    <ul className="list-disc list-outside ml-6 space-y-3 text-gray-300 text-lg">
+                        <li>You've built side projects because you enjoy building things.</li>
+                        <li>You're always experimenting with new tools and technologies.</li>
+                        <li>You can context-switch between different parts of the stack without losing momentum.</li>
+                        <li>You use AI tools not as a crutch, but as a force multiplier.</li>
+                        <li>You ship fast and iterate based on feedback.</li>
+                    </ul>
+                </section>
+
+                {/* How to Apply */}
+                <section className="mb-16">
+                    <h2 className="text-2xl font-bold mb-6">How to Apply</h2>
+                    <p className="text-gray-300 leading-relaxed text-lg mb-6">
+                        If this sounds like you, we'd love to hear from you. Reply to <a href="mailto:hello@madeofcuriosity.com" className="text-[#7366B8] hover:underline">hello@madeofcuriosity.com</a> with answers to the following questions:
+                    </p>
+                    <ol className="list-decimal list-outside ml-6 space-y-3 text-gray-300 text-lg">
+                        <li>Drop a link to something you've built. Can be anything - a side project, app, website, whatever you're proud of.</li>
+                        <li>GitHub or portfolio link? We want to see your code.</li>
+                        <li>Pick a project you've shipped. What was the hardest problem you faced and how did you solve it?</li>
+                        <li>How do you use AI coding tools? (Copilot, Cursor, ChatGPT, whatever you use)</li>
+                        <li>You need to build something with a technology you've never used before. Walk us through your approach.</li>
+                        <li>Have you deployed anything to app stores or cloud platforms? Just tell us what and where.</li>
+                        <li>Tell us about something technical you learned recently that excited you.</li>
+                        <li>What are you building or tinkering with right now, just for fun or learning?</li>
+                    </ol>
+                    <p className="text-gray-300 leading-relaxed text-lg mt-6">
+                        Keep it real, keep it concise. We're looking for clarity and curiosity, not essay-length answers.
+                    </p>
                 </section>
 
                 {/* Join the Team / Bottom CTA */}
                 <section className="pt-8 border-t border-gray-800">
                     <h2 className="text-2xl font-bold mb-6">Join the Team</h2>
                     <p className="text-gray-300 mb-8 text-lg">
-                        Ready to embark on this journey? Send us your application and let's explore the unknown together.
+                        Drop your answers and resume our way. Let's see if you match the Curiosity Code and what we can create together.
                     </p>
                     <a
                         href="mailto:hello@madeofcuriosity.com?subject=Application for Software Developer"
