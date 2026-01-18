@@ -85,7 +85,9 @@ const Maintenance = () => {
                         >
                             <img src={sideSvg} alt="Made of Curiosity" className="w-full max-w-xs" />
                             <a
-                                href="#"
+                                href="/careers/software-developer"
+                                target="_blank"
+                                rel="noopener noreferrer"
                                 className="text-white font-semibold italic text-[14px] underline flex items-center gap-2"
                             >
                                 Hiring
@@ -103,7 +105,9 @@ const Maintenance = () => {
                     >
                         <img src={sideSvg} alt="Made of Curiosity" className="w-full max-w-sm" />
                         <a
-                            href="#"
+                            href="/careers/software-developer"
+                            target="_blank"
+                            rel="noopener noreferrer"
                             className="text-white font-semibold italic text-[14px] underline flex items-center gap-2"
                         >
                             Hiring
