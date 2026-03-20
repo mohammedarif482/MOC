@@ -1,9 +1,15 @@
 import { motion } from 'framer-motion';
 
+
 const NicheBlock = () => {
     return (
-        <section className="bg-black py-32 lg:py-40 border-t border-white/10">
-            <div className="max-w-container mx-auto px-6 lg:px-10">
+        <section className="bg-black py-32 lg:py-40 relative overflow-hidden noise-bg">
+
+            {/* Subtle grid */}
+            <div className="absolute inset-0 grid-bg opacity-60 pointer-events-none" />
+
+
+            <div className="max-w-container mx-auto px-6 lg:px-10 relative z-10 pt-16">
                 <div className="max-w-3xl mx-auto text-center">
                     <motion.div
                         initial={{ opacity: 0, y: 20 }}
@@ -11,16 +17,13 @@ const NicheBlock = () => {
                         transition={{ duration: 0.6 }}
                         viewport={{ once: true }}
                     >
-                        <p className="text-muted text-xs uppercase tracking-widest mb-6">
-                            Our Focus
-                        </p>
-                        <h2 className="text-3xl md:text-4xl lg:text-5xl font-medium leading-tight mb-8">
+                        <p className="text-muted text-xs uppercase tracking-widest mb-6">Our Focus</p>
+                        <h2 className="text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-medium leading-tight mb-8">
                             Built for One Niche.{' '}
                             <span className="font-cursive italic">Deliberately.</span>
                         </h2>
                     </motion.div>
 
-                    <div className="border-t border-white/10 mb-10 max-w-xs mx-auto" />
 
                     <motion.div
                         initial={{ opacity: 0, y: 20 }}
@@ -36,7 +39,7 @@ const NicheBlock = () => {
                             <br />
                             Operations drift without anyone noticing.
                         </p>
-                        <p className="text-white text-base lg:text-lg leading-relaxed font-medium">
+                        <p className="text-white text-lg lg:text-xl leading-relaxed font-medium">
                             We build products that notice.
                         </p>
                         <p className="text-muted text-base lg:text-lg leading-relaxed">
@@ -49,6 +52,7 @@ const NicheBlock = () => {
                     </motion.div>
                 </div>
             </div>
+
         </section>
     );
 };

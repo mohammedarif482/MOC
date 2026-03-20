@@ -76,9 +76,11 @@ const Footer = () => {
                     <p className="text-dim text-xs leading-none">
                         &copy; {new Date().getFullYear()} Made of Curiosity. All rights reserved.
                     </p>
-                    <a href="mailto:hello@madeofcuriosity.com" className="text-dim text-xs leading-none hover:text-white transition-colors">
-                        hello@madeofcuriosity.com
-                    </a>
+                    <div className="flex items-center gap-3 text-dim text-xs leading-none">
+                        <a href="mailto:hello@madeofcuriosity.com" className="hover:text-white transition-colors">hello@madeofcuriosity.com</a>
+                        <span className="text-white/20">|</span>
+                        <span>Kochi, India</span>
+                    </div>
                 </div>
             </div>
         </footer>

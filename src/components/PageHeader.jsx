@@ -16,6 +16,13 @@ const PageHeader = ({ subtitle, title, backgroundImage, icon }) => {
                 </div>
             )}
 
+            {/* Ambient glow */}
+            <div className="absolute top-1/4 right-1/4 w-[500px] h-[500px] rounded-full bg-purple-500/5 blur-[150px] pointer-events-none" />
+            <div className="absolute bottom-0 left-1/3 w-[400px] h-[400px] rounded-full bg-blue-500/5 blur-[120px] pointer-events-none" />
+
+            {/* Grid overlay */}
+            <div className="absolute inset-0 grid-bg opacity-40 pointer-events-none" />
+
             {/* Content */}
             <div className="relative z-10 w-full">
                 <div className="max-w-container mx-auto px-6 lg:px-10 pb-12 lg:pb-16">

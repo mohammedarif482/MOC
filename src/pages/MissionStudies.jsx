@@ -3,10 +3,20 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { ArrowRight, Plus, Minus, Search } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import PageHeader from '../components/PageHeader';
+import AmbientGlow from '../components/AmbientGlow';
 import Footer from '../components/WhyUs';
 import missionHeader from '../assets/images/missionstudies_header.png';
 import researchIcon from '../assets/icons/research_icon.svg';
 import { missionStudiesArticles } from '../data/content';
+
+const cardImages = [
+    'https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=600&h=340&fit=crop',
+    'https://images.unsplash.com/photo-1534972195531-d756b9bfa9f2?w=600&h=340&fit=crop',
+    'https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=600&h=340&fit=crop',
+    'https://images.unsplash.com/photo-1635070041078-e363dbe005cb?w=600&h=340&fit=crop',
+    'https://images.unsplash.com/photo-1532094349884-543bc11b234d?w=600&h=340&fit=crop',
+    'https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=600&h=340&fit=crop',
+];
 
 /* ───────────── DATA ───────────── */
 
@@ -61,8 +71,13 @@ const filterOptions = ['All', 'Gap Reports', 'The Thesis', 'Build Logs', 'Field 
 
 /* ───────────── STUDY CARD ───────────── */
 
-const StudyCard = ({ slug, tag, title, summary, date, readTime, full }) => (
-    <Link to={slug ? `/mission-studies/${slug}` : '/mission-studies'} className={`group block bg-black border border-white/10 hover:border-white/20 hover:bg-white/[0.02] transition-all ${full ? 'p-8 lg:p-10' : 'p-6 lg:p-8'}`}>
+const StudyCard = ({ slug, tag, title, summary, date, readTime, full, imageIndex = 0 }) => (
+    <Link to={slug ? `/mission-studies/${slug}` : '/mission-studies'} className={`group block bg-black border border-white/10 hover:border-white/20 hover:bg-white/[0.02] transition-all ${full ? 'p-0' : 'p-0'}`}>
+        <div className="aspect-[16/10] overflow-hidden">
+            <img src={cardImages[imageIndex % cardImages.length]} alt="" className="w-full h-full object-cover opacity-60 group-hover:opacity-80 group-hover:scale-105 transition-all duration-500" />
+            <div className="card-img-gradient" />
+        </div>
+        <div className={full ? 'p-8 lg:p-10' : 'p-6 lg:p-8'}>
         <span className="text-[11px] text-muted uppercase tracking-wider border border-white/10 px-3 py-1 inline-block mb-5">{tag}</span>
         <h4 className={`text-white font-medium leading-snug mb-4 group-hover:text-muted transition-colors ${full ? 'text-xl lg:text-2xl' : 'text-base lg:text-lg'}`}>{title}</h4>
         {summary && <p className="text-muted text-sm leading-relaxed mb-5">{summary}</p>}
@@ -70,6 +85,7 @@ const StudyCard = ({ slug, tag, title, summary, date, readTime, full }) => (
             <span>{date}</span>
             {readTime && <><span className="w-1 h-1 rounded-full bg-dim" /><span>{readTime}</span></>}
             <span className="ml-auto"><ArrowRight className="w-4 h-4 text-dim group-hover:text-white transition-colors" /></span>
+        </div>
         </div>
     </Link>
 );
@@ -142,8 +158,10 @@ const MissionStudies = () => {
             <PageHeader subtitle="From the Lab" title="Mission Studies" backgroundImage={missionHeader} icon={researchIcon} />
 
             {/* Intro */}
-            <section className="bg-black py-24 lg:py-32">
-                <div className="max-w-container mx-auto px-6 lg:px-10">
+            <section className="bg-black py-24 lg:py-32 relative overflow-hidden grid-bg">
+                <AmbientGlow color="purple" size={500} top="-100px" left="-150px" opacity={0.06} />
+                <AmbientGlow color="blue" size={400} bottom="-50px" right="-100px" opacity={0.05} />
+                <div className="max-w-container mx-auto px-6 lg:px-10 relative z-10">
                     <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }} viewport={{ once: true }} className="max-w-3xl">
                         <h2 className="text-3xl md:text-4xl lg:text-5xl font-medium leading-tight mb-8">
                             This Is How We Find What's Broken{' '}<span className="font-cursive italic">Before We Build Anything.</span>
@@ -169,6 +187,7 @@ const MissionStudies = () => {
                     </div>
                 </div>
             </section>
+
 
             {/* Category Explainer */}
             <section className="bg-black py-24 lg:py-32 border-t border-white/10">
@@ -213,12 +232,15 @@ const MissionStudies = () => {
                 </section>
             )}
 
+
             {/* Featured Study */}
-            <section className="bg-black py-20 lg:py-24 border-t border-white/10">
-                <div className="max-w-container mx-auto px-6 lg:px-10">
+            <section className="bg-black py-20 lg:py-24 border-t border-white/10 relative overflow-hidden">
+                <AmbientGlow color="purple" size={600} top="-200px" right="-200px" opacity={0.05} />
+                <div className="max-w-container mx-auto px-6 lg:px-10 relative z-10">
                     <p className="text-xs text-dim uppercase tracking-widest mb-8 font-medium">Featured Study</p>
                     <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }} viewport={{ once: true }}>
-                        <div className="border border-white/10 p-8 lg:p-12 hover:border-white/20 transition-colors">
+                        <div className="border border-white/10 p-8 lg:p-12 hover:border-white/20 transition-colors relative overflow-hidden">
+                            <img src="https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=1200&h=600&fit=crop" alt="" className="absolute inset-0 w-full h-full object-cover opacity-10" />
                             <span className="text-[11px] text-muted uppercase tracking-wider border border-white/10 px-3 py-1 inline-block mb-6">Gap Report — March 2026</span>
                             <h3 className="text-2xl md:text-3xl lg:text-4xl font-medium text-white leading-tight mb-8 max-w-3xl">Why Most Businesses Are Flying Blind on Their Own Metrics</h3>
                             <div className="border-t border-white/10 pt-8 mb-8 max-w-2xl space-y-4">
@@ -246,7 +268,7 @@ const MissionStudies = () => {
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                         {filteredGapReports.map((r, i) => (
                             <motion.div key={r.slug} initial={{ opacity: 0, y: 15 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.5, delay: i * 0.1 }} viewport={{ once: true }}>
-                                <StudyCard slug={r.slug} tag="Gap Report" title={r.title} summary={r.summary} date={r.date} readTime={r.readTime} />
+                                <StudyCard slug={r.slug} tag="Gap Report" title={r.title} summary={r.summary} date={r.date} readTime={r.readTime} imageIndex={i} />
                             </motion.div>
                         ))}
                     </div>
@@ -264,7 +286,7 @@ const MissionStudies = () => {
                     <div className="mt-16 space-y-6">
                         {filteredThesis.map((a, i) => (
                             <motion.div key={a.slug} initial={{ opacity: 0, y: 15 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.5, delay: i * 0.1 }} viewport={{ once: true }}>
-                                <StudyCard slug={a.slug} tag="The Thesis" title={a.title} summary={a.summary} date={`${a.date}  ·  ${a.readTime}  ·  By ${a.author}`} full />
+                                <StudyCard slug={a.slug} tag="The Thesis" title={a.title} summary={a.summary} date={`${a.date}  ·  ${a.readTime}  ·  By ${a.author}`} full imageIndex={i + 2} />
                             </motion.div>
                         ))}
                     </div>
@@ -282,7 +304,7 @@ const MissionStudies = () => {
                     <div className="mt-16 grid grid-cols-1 md:grid-cols-2 gap-6">
                         {filteredBuildLogs.map((l, i) => (
                             <motion.div key={l.slug} initial={{ opacity: 0, y: 15 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.5, delay: i * 0.1 }} viewport={{ once: true }}>
-                                <StudyCard slug={l.slug} tag="Build Log" title={l.title} summary={l.summary} date={l.date} readTime={l.readTime} />
+                                <StudyCard slug={l.slug} tag="Build Log" title={l.title} summary={l.summary} date={l.date} readTime={l.readTime} imageIndex={i + 4} />
                             </motion.div>
                         ))}
                     </div>
@@ -316,6 +338,7 @@ const MissionStudies = () => {
                     </div>
                 </div>
             </section>}
+
 
             {/* Research Process */}
             <section className="bg-black py-24 lg:py-32 border-t border-white/10">

@@ -1,8 +1,15 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, lazy, Suspense, Component } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ArrowRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
-import heroBg from '../assets/images/hero_bg.png';
+
+const HeroBackground3D = lazy(() => import('./HeroBackground3D'));
+
+class ErrorBoundary extends Component {
+    constructor(props) { super(props); this.state = { hasError: false }; }
+    static getDerivedStateFromError() { return { hasError: true }; }
+    render() { return this.state.hasError ? (this.props.fallback || null) : this.props.children; }
+}
 
 // Sliding number - whole number slides as one unit
 const SlidingNumber = ({ value }) => {
@@ -62,16 +69,13 @@ const Hero = () => {
     }, []);
 
     return (
-        <section className="relative min-h-screen flex flex-col bg-black">
-            {/* Background image */}
-            <div className="absolute inset-0">
-                <img
-                    src={heroBg}
-                    alt=""
-                    className="w-full h-full object-cover"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-black/20" />
-            </div>
+        <section className="relative min-h-screen flex flex-col bg-black" data-hero-section>
+            {/* 3D Background */}
+            <ErrorBoundary fallback={<div className="absolute inset-0 bg-black" />}>
+                <Suspense fallback={<div className="absolute inset-0 bg-black" />}>
+                    <HeroBackground3D />
+                </Suspense>
+            </ErrorBoundary>
 
             {/* Content */}
             <div className="relative z-10 flex-1 flex items-center justify-center px-6 lg:px-10 pt-32 pb-20 lg:pb-28">
@@ -113,8 +117,7 @@ const Hero = () => {
                         transition={{ duration: 0.6, delay: 0.3 }}
                         className="text-muted text-base lg:text-lg max-w-xl mx-auto leading-relaxed mb-10"
                     >
-                        We build foundational software that transforms how organizations
-                        operate. From concept to deployment, we deliver solutions that matter.
+                        We are a research-led product house. We find what's broken, build the fix, and prove it with data.
                     </motion.p>
 
                     <motion.div

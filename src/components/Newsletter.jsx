@@ -2,18 +2,22 @@ import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { ArrowRight } from 'lucide-react';
 
+
 const Newsletter = () => {
     const [email, setEmail] = useState('');
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        // Handle subscription
         setEmail('');
     };
 
     return (
-        <section className="bg-black py-32 lg:py-40 border-t border-white/10">
-            <div className="max-w-container mx-auto px-6 lg:px-10">
+        <section className="bg-black py-32 lg:py-40 relative overflow-hidden noise-bg">
+
+            <div className="absolute inset-0 grid-bg opacity-40 pointer-events-none" />
+
+
+            <div className="max-w-container mx-auto px-6 lg:px-10 relative z-10 pt-16">
                 <div className="max-w-2xl mx-auto text-center">
                     <motion.div
                         initial={{ opacity: 0, y: 20 }}
@@ -21,16 +25,13 @@ const Newsletter = () => {
                         transition={{ duration: 0.6 }}
                         viewport={{ once: true }}
                     >
-                        <p className="text-muted text-xs uppercase tracking-widest mb-6">
-                            Stay in the Loop
-                        </p>
+                        <p className="text-muted text-xs uppercase tracking-widest mb-6">Stay in the Loop</p>
                         <h2 className="text-3xl md:text-4xl lg:text-5xl font-medium leading-tight mb-6">
                             Get the Signal Before{' '}
                             <span className="font-cursive italic">It Becomes a Product.</span>
                         </h2>
                         <p className="text-muted text-base leading-relaxed mb-10">
-                            Raw research. Early findings. Honest build logs.
-                            <br />
+                            Raw research. Early findings. Honest build logs.<br />
                             No pitch. No fluff. Just what we're learning.
                         </p>
                     </motion.div>
@@ -55,8 +56,7 @@ const Newsletter = () => {
                             type="submit"
                             className="inline-flex items-center justify-center gap-2 bg-white text-black px-6 py-3 text-sm font-medium hover:bg-white/90 transition-colors shrink-0"
                         >
-                            Subscribe
-                            <ArrowRight className="w-4 h-4" />
+                            Subscribe <ArrowRight className="w-4 h-4" />
                         </button>
                     </motion.form>
 
@@ -71,6 +71,7 @@ const Newsletter = () => {
                     </motion.p>
                 </div>
             </div>
+
         </section>
     );
 };

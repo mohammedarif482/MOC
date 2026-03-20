@@ -1,5 +1,7 @@
+import { useState } from 'react';
 import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
 import Navbar from './components/Layout/Navbar';
+import Preloader from './components/Preloader';
 import Home from './pages/Home';
 import InfinityCanvas from './pages/InfinityCanvas';
 import MissionStudies from './pages/MissionStudies';
@@ -61,10 +63,15 @@ function AppContent() {
 }
 
 function App() {
+    const [loading, setLoading] = useState(true);
+
     return (
-        <Router>
-            <AppContent />
-        </Router>
+        <>
+            {loading && <Preloader onComplete={() => setLoading(false)} />}
+            <Router>
+                <AppContent />
+            </Router>
+        </>
     );
 }
 

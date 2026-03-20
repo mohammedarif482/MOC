@@ -3,6 +3,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { ArrowRight, Plus, Minus, Check, X } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import PageHeader from '../components/PageHeader';
+import AmbientGlow from '../components/AmbientGlow';
 import Footer from '../components/WhyUs';
 import canvasHeader from '../assets/images/canvas_header.png';
 import canvasIcon from '../assets/icons/canvas_icon.svg';
@@ -275,7 +276,7 @@ const Offerings = () => {
             </section>
 
             {/* How We Work */}
-            <section className="bg-black py-24 lg:py-32 border-t border-white/10">
+            <section className="bg-black py-24 lg:py-32 border-t border-white/10 grid-bg">
                 <div className="max-w-container mx-auto px-6 lg:px-10">
                     <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }} viewport={{ once: true }} className="mb-16">
                         <p className="text-muted text-xs uppercase tracking-widest mb-4">How It Works</p>
@@ -295,8 +296,10 @@ const Offerings = () => {
             </section>
 
             {/* Why MOC */}
-            <section className="bg-black py-24 lg:py-32 border-t border-white/10">
-                <div className="max-w-container mx-auto px-6 lg:px-10">
+            <section className="bg-black py-24 lg:py-32 border-t border-white/10 relative overflow-hidden">
+                <AmbientGlow color="purple" size={500} top="-120px" left="-150px" opacity={0.05} />
+                <AmbientGlow color="blue" size={400} bottom="-100px" right="-100px" opacity={0.04} />
+                <div className="max-w-container mx-auto px-6 lg:px-10 relative z-10">
                     <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }} viewport={{ once: true }} className="mb-16">
                         <p className="text-muted text-xs uppercase tracking-widest mb-4">Why MOC</p>
                         <h2 className="text-3xl md:text-4xl lg:text-5xl font-medium leading-tight max-w-3xl">Not an Agency. Not a Dev Shop.{' '}<span className="font-cursive italic">Something More Specific.</span></h2>

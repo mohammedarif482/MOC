@@ -3,12 +3,10 @@ import { ArrowRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
 const team = [
-    { name: 'Name', role: 'Researcher' },
-    { name: 'Name', role: 'Builder' },
-    { name: 'Name', role: 'Builder' },
-    { name: 'Name', role: 'Researcher' },
-    { name: 'Name', role: 'Designer' },
-    { name: 'Name', role: 'Builder' },
+    { name: 'Name', role: 'Researcher', image: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=400&fit=crop&crop=face' },
+    { name: 'Name', role: 'Builder', image: 'https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=400&h=400&fit=crop&crop=face' },
+    { name: 'Name', role: 'Designer', image: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=400&h=400&fit=crop&crop=face' },
+    { name: 'Name', role: 'Builder', image: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=400&h=400&fit=crop&crop=face' },
 ];
 
 const TeamTeaser = () => {
@@ -23,9 +21,7 @@ const TeamTeaser = () => {
                         transition={{ duration: 0.6 }}
                         viewport={{ once: true }}
                     >
-                        <p className="text-muted text-xs uppercase tracking-widest mb-4">
-                            The People
-                        </p>
+                        <p className="text-muted text-xs uppercase tracking-widest mb-4">The People</p>
                         <h2 className="text-3xl md:text-4xl lg:text-5xl font-medium leading-tight mb-6">
                             High-Agency. Opinionated.{' '}
                             <span className="font-cursive italic">Built Different.</span>
@@ -43,31 +39,34 @@ const TeamTeaser = () => {
                         </Link>
                     </motion.div>
 
-                    {/* Right - Team Grid */}
+                    {/* Right - Team Grid with photos */}
                     <motion.div
                         initial={{ opacity: 0, y: 20 }}
                         whileInView={{ opacity: 1, y: 0 }}
                         transition={{ duration: 0.6, delay: 0.15 }}
                         viewport={{ once: true }}
                     >
-                        <div className="grid grid-cols-2 gap-px bg-white/10">
+                        <div className="grid grid-cols-2 gap-4">
                             {team.map((member, i) => (
-                                <div
+                                <motion.div
                                     key={i}
-                                    className="bg-black p-6 lg:p-8"
+                                    initial={{ opacity: 0, y: 15 }}
+                                    whileInView={{ opacity: 1, y: 0 }}
+                                    transition={{ duration: 0.4, delay: i * 0.08 }}
+                                    viewport={{ once: true }}
+                                    className="group"
                                 >
-                                    <div className="w-10 h-10 bg-surface border border-white/10 mb-4 flex items-center justify-center">
-                                        <span className="text-dim text-xs font-medium">
-                                            {member.name.charAt(0)}
-                                        </span>
+                                    <div className="relative aspect-square overflow-hidden border border-white/10 mb-3">
+                                        <img
+                                            src={member.image}
+                                            alt={member.name}
+                                            className="w-full h-full object-cover grayscale group-hover:grayscale-0 opacity-70 group-hover:opacity-90 transition-all duration-500"
+                                        />
+                                        <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
                                     </div>
-                                    <p className="text-white text-sm font-medium">
-                                        {member.name}
-                                    </p>
-                                    <p className="text-dim text-xs uppercase tracking-wider mt-1">
-                                        {member.role}
-                                    </p>
-                                </div>
+                                    <p className="text-white text-sm font-medium">{member.name}</p>
+                                    <p className="text-dim text-xs uppercase tracking-wider">{member.role}</p>
+                                </motion.div>
                             ))}
                         </div>
                     </motion.div>

@@ -53,7 +53,6 @@ const Navbar = () => {
 
     const bottomNavLinks = [
         { name: 'Offerings', path: '/offerings' },
-        { name: 'Impact Studies', path: '/impact-studies' },
         { name: 'Curiosity Code', path: '/curiosity-code' },
         { name: 'Join the Orbit', path: '/orbit-crew' },
     ];

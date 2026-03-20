@@ -3,6 +3,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { ArrowRight, Plus, Minus, Search } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import PageHeader from '../components/PageHeader';
+import AmbientGlow from '../components/AmbientGlow';
 import Footer from '../components/WhyUs';
 import missionHeader from '../assets/images/missionstudies_header.png';
 import researchIcon from '../assets/icons/research_icon.svg';
@@ -44,7 +45,7 @@ const faqCategories = [
 /* ───────────── STUDY CARD ───────────── */
 
 const StudyCard = ({ slug, product, sector, title, summary, date }) => (
-    <Link to={slug ? `/impact-studies/${slug}` : '/impact-studies'} className="group block bg-black border border-white/10 hover:border-white/20 hover:bg-white/[0.02] transition-all p-6 lg:p-8">
+    <Link to={slug ? `/impact-studies/${slug}` : '/impact-studies'} className="group block bg-black border border-white/10 hover:border-white/20 hover:bg-white/[0.02] transition-all p-6 lg:p-8 gradient-border">
         <div className="flex items-center gap-3 mb-5">
             <span className="text-[11px] text-muted uppercase tracking-wider border border-white/10 px-3 py-1 inline-block">{product}</span>
             <span className="text-[11px] text-dim uppercase tracking-wider">{sector}</span>
@@ -125,8 +126,10 @@ const ImpactStudies = () => {
             <PageHeader subtitle="Real Results" title="Impact Studies" backgroundImage={missionHeader} icon={researchIcon} />
 
             {/* Intro */}
-            <section className="bg-black py-24 lg:py-32">
-                <div className="max-w-container mx-auto px-6 lg:px-10">
+            <section className="bg-black py-24 lg:py-32 relative overflow-hidden">
+                <AmbientGlow color="blue" size={500} top="-100px" left="-150px" opacity={0.06} />
+                <AmbientGlow color="green" size={400} bottom="-80px" right="-100px" opacity={0.04} />
+                <div className="max-w-container mx-auto px-6 lg:px-10 relative z-10">
                     <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }} viewport={{ once: true }} className="max-w-3xl">
                         <h2 className="text-3xl md:text-4xl lg:text-5xl font-medium leading-tight mb-8">
                             Problems Solved.{' '}<span className="font-cursive italic">Measured. Published.</span>
@@ -176,11 +179,13 @@ const ImpactStudies = () => {
             </section>
 
             {/* Featured Study */}
-            <section className="bg-black py-20 lg:py-24 border-t border-white/10">
-                <div className="max-w-container mx-auto px-6 lg:px-10">
+            <section className="bg-black py-20 lg:py-24 border-t border-white/10 relative overflow-hidden">
+                <AmbientGlow color="blue" size={600} top="-200px" right="-200px" opacity={0.05} />
+                <div className="max-w-container mx-auto px-6 lg:px-10 relative z-10">
                     <p className="text-xs text-dim uppercase tracking-widest mb-8 font-medium">Featured Impact Study</p>
                     <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }} viewport={{ once: true }}>
-                        <div className="border border-white/10 p-8 lg:p-12 hover:border-white/20 transition-colors">
+                        <div className="border border-white/10 p-8 lg:p-12 hover:border-white/20 transition-colors relative overflow-hidden">
+                            <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=1200&h=600&fit=crop" alt="" className="absolute inset-0 w-full h-full object-cover opacity-[0.07]" />
                             <div className="flex items-center gap-3 mb-6">
                                 <span className="text-[11px] text-muted uppercase tracking-wider border border-white/10 px-3 py-1 inline-block">Visualize</span>
                                 <span className="text-[11px] text-dim uppercase tracking-wider">D2C Brand</span>
@@ -213,16 +218,16 @@ const ImpactStudies = () => {
                             {/* Result */}
                             <div className="border-t border-white/10 pt-8 mb-8">
                                 <p className="text-xs text-dim uppercase tracking-widest mb-6 font-medium">The Result</p>
-                                <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
-                                    <div className="border border-white/10 p-6">
+                                <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8 relative z-10">
+                                    <div className="border border-white/10 p-6 relative overflow-hidden bg-blue-500/[0.03]" style={{ boxShadow: 'inset 0 0 30px rgba(59,130,246,0.05)' }}>
                                         <p className="text-3xl font-semibold text-white mb-2">3</p>
                                         <p className="text-xs text-muted uppercase tracking-wider">Leaking budget lines identified in 30 days</p>
                                     </div>
-                                    <div className="border border-white/10 p-6">
+                                    <div className="border border-white/10 p-6 relative overflow-hidden bg-blue-500/[0.03]" style={{ boxShadow: 'inset 0 0 30px rgba(59,130,246,0.05)' }}>
                                         <p className="text-3xl font-semibold text-white mb-2">70%</p>
                                         <p className="text-xs text-muted uppercase tracking-wider">Reporting time reduced</p>
                                     </div>
-                                    <div className="border border-white/10 p-6">
+                                    <div className="border border-white/10 p-6 relative overflow-hidden bg-blue-500/[0.03]" style={{ boxShadow: 'inset 0 0 30px rgba(59,130,246,0.05)' }}>
                                         <p className="text-3xl font-semibold text-white mb-2">&lt;2 weeks</p>
                                         <p className="text-xs text-muted uppercase tracking-wider">Full cross-department visibility achieved</p>
                                     </div>

@@ -3,10 +3,20 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { ArrowRight, Plus, Minus, Search } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import PageHeader from '../components/PageHeader';
+import AmbientGlow from '../components/AmbientGlow';
 import Footer from '../components/WhyUs';
 import curiosityCodeHeader from '../assets/images/curiositycode_header.png';
 import curiosityCodeIcon from '../assets/icons/curiositycode_icon.svg';
 import { signalReports } from '../data/content';
+
+const reportImages = [
+    'https://images.unsplash.com/photo-1635070041078-e363dbe005cb?w=600&h=340&fit=crop',
+    'https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=600&h=340&fit=crop',
+    'https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=600&h=340&fit=crop',
+    'https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=600&h=340&fit=crop',
+    'https://images.unsplash.com/photo-1534972195531-d756b9bfa9f2?w=600&h=340&fit=crop',
+    'https://images.unsplash.com/photo-1532094349884-543bc11b234d?w=600&h=340&fit=crop',
+];
 
 /* ───────────── DATA ───────────── */
 
@@ -65,8 +75,13 @@ const faqCategories = [
 
 /* ───────────── REPORT CARD ───────────── */
 
-const ReportCard = ({ slug, tag, title, summary, date, readTime, free, coming }) => (
-    <Link to={slug ? `/the-signal/${slug}` : '/the-signal'} className={`group block bg-black border border-white/10 hover:border-white/20 hover:bg-white/[0.02] transition-all p-6 lg:p-8 ${coming ? 'opacity-60' : ''}`}>
+const ReportCard = ({ slug, tag, title, summary, date, readTime, free, coming, imageIndex = 0 }) => (
+    <Link to={slug ? `/the-signal/${slug}` : '/the-signal'} className={`group block bg-black border border-white/10 hover:border-white/20 hover:bg-white/[0.02] transition-all ${coming ? 'opacity-60' : ''}`}>
+        <div className="aspect-[16/10] overflow-hidden relative">
+            <img src={reportImages[imageIndex % reportImages.length]} alt="" className="w-full h-full object-cover opacity-60 group-hover:opacity-80 group-hover:scale-105 transition-all duration-500" />
+            <div className="card-img-gradient" />
+        </div>
+        <div className="p-6 lg:p-8">
         <div className="flex items-center gap-3 mb-5">
             <span className="text-[11px] text-muted uppercase tracking-wider border border-white/10 px-3 py-1 inline-block">{tag}</span>
             {free && <span className="text-[11px] text-black uppercase tracking-wider bg-white px-3 py-1 inline-block font-medium">Free</span>}
@@ -78,6 +93,7 @@ const ReportCard = ({ slug, tag, title, summary, date, readTime, free, coming })
             <span>{date}</span>
             {readTime && <><span className="w-1 h-1 rounded-full bg-dim" /><span>{readTime}</span></>}
             <span className="ml-auto"><ArrowRight className="w-4 h-4 text-dim group-hover:text-white transition-colors" /></span>
+        </div>
         </div>
     </Link>
 );
@@ -95,7 +111,7 @@ const ReportSection = ({ tag, sectionTitle, subtitle, intro, reports, free }) =>
             <div className="mt-16 grid grid-cols-1 md:grid-cols-2 gap-6">
                 {reports.map((r, i) => (
                     <motion.div key={r.slug || i} initial={{ opacity: 0, y: 15 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.5, delay: i * 0.1 }} viewport={{ once: true }}>
-                        <ReportCard slug={r.slug} tag={tag} title={r.title} summary={r.summary} date={r.date} readTime={r.readTime} free={free || r.free} coming={r.coming} />
+                        <ReportCard slug={r.slug} tag={tag} title={r.title} summary={r.summary} date={r.date} readTime={r.readTime} free={free || r.free} coming={r.coming} imageIndex={i} />
                     </motion.div>
                 ))}
             </div>
@@ -174,8 +190,10 @@ const TheSignal = () => {
             <PageHeader subtitle="Data. Patterns. Signal." title="The Signal" backgroundImage={curiosityCodeHeader} icon={curiosityCodeIcon} />
 
             {/* Intro */}
-            <section className="bg-black py-24 lg:py-32">
-                <div className="max-w-container mx-auto px-6 lg:px-10">
+            <section className="bg-black py-24 lg:py-32 relative overflow-hidden">
+                <AmbientGlow color="blue" size={500} top="-100px" left="-150px" opacity={0.06} />
+                <AmbientGlow color="cyan" size={400} bottom="-80px" right="-100px" opacity={0.05} />
+                <div className="max-w-container mx-auto px-6 lg:px-10 relative z-10">
                     <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }} viewport={{ once: true }} className="max-w-3xl">
                         <h2 className="text-3xl md:text-4xl lg:text-5xl font-medium leading-tight mb-8">
                             Data We've Collected.{' '}<span className="font-cursive italic">Patterns We've Found.</span>
@@ -191,7 +209,7 @@ const TheSignal = () => {
             </section>
 
             {/* Stats */}
-            <section className="bg-black border-t border-white/10">
+            <section className="bg-black border-t border-white/10 grid-bg-dense">
                 <div className="max-w-container mx-auto px-6 lg:px-10">
                     <div className="grid grid-cols-2 md:grid-cols-4 gap-px bg-white/10">
                         {[{ value: '8+', label: 'Reports Published' }, { value: '200+', label: 'Accounts Analyzed' }, { value: '50+', label: 'Businesses Studied' }, { value: '3', label: 'Industries Covered' }].map((s, i) => (
@@ -246,11 +264,13 @@ const TheSignal = () => {
             </section>
 
             {/* Featured Report */}
-            <section className="bg-black py-20 lg:py-24 border-t border-white/10">
-                <div className="max-w-container mx-auto px-6 lg:px-10">
+            <section className="bg-black py-20 lg:py-24 border-t border-white/10 relative overflow-hidden">
+                <AmbientGlow color="cyan" size={600} top="-200px" right="-200px" opacity={0.05} />
+                <div className="max-w-container mx-auto px-6 lg:px-10 relative z-10">
                     <p className="text-xs text-dim uppercase tracking-widest mb-8 font-medium">Featured Report</p>
                     <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }} viewport={{ once: true }}>
-                        <div className="border border-white/10 p-8 lg:p-12 hover:border-white/20 transition-colors">
+                        <div className="border border-white/10 p-8 lg:p-12 hover:border-white/20 transition-colors relative overflow-hidden">
+                            <img src="https://images.unsplash.com/photo-1635070041078-e363dbe005cb?w=1200&h=600&fit=crop" alt="" className="absolute inset-0 w-full h-full object-cover opacity-10" />
                             <div className="flex items-center gap-3 mb-6">
                                 <span className="text-[11px] text-muted uppercase tracking-wider border border-white/10 px-3 py-1 inline-block">Industry Report — Q1 2026</span>
                                 <span className="text-[11px] text-black uppercase tracking-wider bg-white px-3 py-1 inline-block font-medium">Free</span>
@@ -306,7 +326,7 @@ const TheSignal = () => {
                     <div className="mt-16 grid grid-cols-1 md:grid-cols-2 gap-6">
                         {filteredBenchmarks.map((b, i) => (
                             <motion.div key={b.slug || i} initial={{ opacity: 0, y: 15 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.5, delay: i * 0.1 }} viewport={{ once: true }}>
-                                <ReportCard slug={b.slug} tag="Benchmark" title={b.title} summary={b.summary} date={b.date} readTime={b.readTime} coming={b.coming} />
+                                <ReportCard slug={b.slug} tag="Benchmark" title={b.title} summary={b.summary} date={b.date} readTime={b.readTime} coming={b.coming} imageIndex={i + 2} />
                             </motion.div>
                         ))}
                     </div>

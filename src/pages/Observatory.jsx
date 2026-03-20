@@ -3,10 +3,20 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { ArrowRight, Plus, Minus, Search } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import PageHeader from '../components/PageHeader';
+import AmbientGlow from '../components/AmbientGlow';
 import Footer from '../components/WhyUs';
 import curiosityCodeHeader from '../assets/images/curiositycode_header.png';
 import curiosityCodeIcon from '../assets/icons/curiositycode_icon.svg';
 import { observatoryEssays } from '../data/content';
+
+const essayImages = [
+    'https://images.unsplash.com/photo-1559757175-5700dde675bc?w=600&h=340&fit=crop',
+    'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=600&h=340&fit=crop',
+    'https://images.unsplash.com/photo-1532094349884-543bc11b234d?w=600&h=340&fit=crop',
+    'https://images.unsplash.com/photo-1534972195531-d756b9bfa9f2?w=600&h=340&fit=crop',
+    'https://images.unsplash.com/photo-1635070041078-e363dbe005cb?w=600&h=340&fit=crop',
+    'https://images.unsplash.com/photo-1504639725590-34d0984388bd?w=600&h=340&fit=crop',
+];
 
 /* ───────────── DATA ───────────── */
 
@@ -58,8 +68,13 @@ const faqCategories = [
 
 /* ───────────── ESSAY CARD ───────────── */
 
-const EssayCard = ({ slug, tag, title, summary, date, readTime, full }) => (
-    <Link to={slug ? `/the-observatory/${slug}` : '/the-observatory'} className={`group block bg-black border border-white/10 hover:border-white/20 hover:bg-white/[0.02] transition-all ${full ? 'p-8 lg:p-10' : 'p-6 lg:p-8'}`}>
+const EssayCard = ({ slug, tag, title, summary, date, readTime, full, imageIndex = 0 }) => (
+    <Link to={slug ? `/the-observatory/${slug}` : '/the-observatory'} className={`group block bg-black border border-white/10 hover:border-white/20 hover:bg-white/[0.02] transition-all`}>
+        <div className="aspect-[16/10] overflow-hidden relative">
+            <img src={essayImages[imageIndex % essayImages.length]} alt="" className="w-full h-full object-cover opacity-60 group-hover:opacity-80 group-hover:scale-105 transition-all duration-500" />
+            <div className="card-img-gradient" />
+        </div>
+        <div className={full ? 'p-8 lg:p-10' : 'p-6 lg:p-8'}>
         <span className="text-[11px] text-muted uppercase tracking-wider border border-white/10 px-3 py-1 inline-block mb-5">{tag}</span>
         <h4 className={`text-white font-medium leading-snug mb-4 group-hover:text-muted transition-colors ${full ? 'text-xl lg:text-2xl' : 'text-base lg:text-lg'}`}>{title}</h4>
         {summary && <p className="text-muted text-sm leading-relaxed mb-5">{summary}</p>}
@@ -67,6 +82,7 @@ const EssayCard = ({ slug, tag, title, summary, date, readTime, full }) => (
             <span>{date}</span>
             {readTime && <><span className="w-1 h-1 rounded-full bg-dim" /><span>{readTime}</span></>}
             <span className="ml-auto"><ArrowRight className="w-4 h-4 text-dim group-hover:text-white transition-colors" /></span>
+        </div>
         </div>
     </Link>
 );
@@ -84,7 +100,7 @@ const EssaySection = ({ tag, sectionTitle, subtitle, intro, essays }) => (
             <div className="mt-16 grid grid-cols-1 md:grid-cols-2 gap-6">
                 {essays.map((e, i) => (
                     <motion.div key={e.slug || i} initial={{ opacity: 0, y: 15 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.5, delay: i * 0.1 }} viewport={{ once: true }}>
-                        <EssayCard slug={e.slug} tag={tag} title={e.title} summary={e.summary} date={e.date} readTime={e.readTime} />
+                        <EssayCard slug={e.slug} tag={tag} title={e.title} summary={e.summary} date={e.date} readTime={e.readTime} imageIndex={i} />
                     </motion.div>
                 ))}
             </div>
@@ -160,8 +176,10 @@ const Observatory = () => {
             <PageHeader subtitle="The Deep End" title="The Observatory" backgroundImage={curiosityCodeHeader} icon={curiosityCodeIcon} />
 
             {/* Intro */}
-            <section className="bg-black py-24 lg:py-32">
-                <div className="max-w-container mx-auto px-6 lg:px-10">
+            <section className="bg-black py-24 lg:py-32 relative overflow-hidden noise-bg">
+                <AmbientGlow color="purple" size={500} top="-120px" left="-100px" opacity={0.06} />
+                <AmbientGlow color="blue" size={350} bottom="-80px" right="-80px" opacity={0.04} />
+                <div className="max-w-container mx-auto px-6 lg:px-10 relative z-10">
                     <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }} viewport={{ once: true }} className="max-w-3xl">
                         <h2 className="text-3xl md:text-4xl lg:text-5xl font-medium leading-tight mb-8">
                             We Think About More Than Products.{' '}<span className="font-cursive italic">This Is MOC Thinking Out Loud.</span>
@@ -226,11 +244,13 @@ const Observatory = () => {
             </section>
 
             {/* Featured Essay */}
-            <section className="bg-black py-20 lg:py-24 border-t border-white/10">
-                <div className="max-w-container mx-auto px-6 lg:px-10">
+            <section className="bg-black py-20 lg:py-24 border-t border-white/10 relative overflow-hidden">
+                <AmbientGlow color="purple" size={500} top="-150px" right="-150px" opacity={0.05} />
+                <div className="max-w-container mx-auto px-6 lg:px-10 relative z-10">
                     <p className="text-xs text-dim uppercase tracking-widest mb-8 font-medium">Featured Essay</p>
                     <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }} viewport={{ once: true }}>
-                        <div className="border border-white/10 p-8 lg:p-12 hover:border-white/20 transition-colors">
+                        <div className="border border-white/10 p-8 lg:p-12 hover:border-white/20 transition-colors relative overflow-hidden">
+                            <img src="https://images.unsplash.com/photo-1559757175-5700dde675bc?w=1200&h=600&fit=crop" alt="" className="absolute inset-0 w-full h-full object-cover opacity-10" />
                             <span className="text-[11px] text-muted uppercase tracking-wider border border-white/10 px-3 py-1 inline-block mb-6">Psychology — March 2026</span>
                             <h3 className="text-2xl md:text-3xl lg:text-4xl font-medium text-white leading-tight mb-8 max-w-3xl">On Why Users Don't Do What They Say They Will</h3>
                             <div className="border-t border-white/10 pt-8 mb-8 max-w-2xl space-y-4">

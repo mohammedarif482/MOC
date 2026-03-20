@@ -3,6 +3,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { ArrowRight, Plus, Minus, Check, X } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import PageHeader from '../components/PageHeader';
+import AmbientGlow from '../components/AmbientGlow';
 import Footer from '../components/WhyUs';
 import orbitCrewHeader from '../assets/images/orbitcrew_header.png';
 import orbitCrewIcon from '../assets/icons/orbitcrew_icon.svg';
@@ -188,7 +189,7 @@ const OrbitCrew = () => {
             </section>
 
             {/* The Manifesto */}
-            <section className="bg-black py-24 lg:py-32 border-t border-white/10">
+            <section className="bg-black py-24 lg:py-32 border-t border-white/10 noise-bg">
                 <div className="max-w-container mx-auto px-6 lg:px-10">
                     <div className="max-w-3xl mx-auto">
                         <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }} viewport={{ once: true }}>
@@ -242,8 +243,10 @@ const OrbitCrew = () => {
             </section>
 
             {/* Open Roles */}
-            <section className="bg-black py-24 lg:py-32 border-t border-white/10">
-                <div className="max-w-container mx-auto px-6 lg:px-10">
+            <section className="bg-black py-24 lg:py-32 border-t border-white/10 relative overflow-hidden">
+                <AmbientGlow color="purple" size={500} top="-120px" right="-150px" opacity={0.05} />
+                <AmbientGlow color="blue" size={400} bottom="-100px" left="-100px" opacity={0.04} />
+                <div className="max-w-container mx-auto px-6 lg:px-10 relative z-10">
                     <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }} viewport={{ once: true }} className="mb-16">
                         <p className="text-muted text-xs uppercase tracking-widest mb-4">Open Roles</p>
                         <h2 className="text-3xl md:text-4xl lg:text-5xl font-medium leading-tight max-w-3xl">What We're Looking{' '}<span className="font-cursive italic">For Right Now.</span></h2>
@@ -251,7 +254,7 @@ const OrbitCrew = () => {
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                         {openRoles.map((role, i) => (
                             <motion.div key={role.slug || i} initial={{ opacity: 0, y: 15 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.5, delay: i * 0.08 }} viewport={{ once: true }}>
-                                <Link to={role.slug ? `/orbit-crew/${role.slug}` : '/orbit-crew'} className="group block border border-white/10 p-6 lg:p-8 hover:border-white/20 hover:bg-white/[0.02] transition-all">
+                                <Link to={role.slug ? `/orbit-crew/${role.slug}` : '/orbit-crew'} className="group block border border-white/10 p-6 lg:p-8 hover:border-white/20 hover:bg-white/[0.02] transition-all gradient-border">
                                     <div className="flex items-center justify-between mb-5">
                                         <span className={`text-[11px] uppercase tracking-wider px-3 py-1 inline-block ${role.open ? 'text-green-400 border border-green-400/30' : 'text-muted border border-white/10'}`}>
                                             {role.alwaysOpen ? '◌ Always Open' : '● Open'}

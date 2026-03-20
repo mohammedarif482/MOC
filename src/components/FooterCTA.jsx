@@ -2,12 +2,17 @@ import { motion } from 'framer-motion';
 import { ArrowRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
+
 const FooterCTA = () => {
     return (
-        <section className="bg-black py-24 lg:py-32 border-t border-white/10">
-            <div className="max-w-container mx-auto px-6 lg:px-10">
-                <div className="border border-white/10 p-10 lg:p-16">
-                    <div className="max-w-2xl mx-auto text-center">
+        <section className="bg-black py-24 lg:py-32 relative overflow-hidden">
+
+            <div className="max-w-container mx-auto px-6 lg:px-10 relative z-10">
+                <div className="border border-white/10 p-10 lg:p-16 relative overflow-hidden">
+                    {/* Background grid */}
+                    <div className="absolute inset-0 grid-bg-dense opacity-40 pointer-events-none" />
+
+                    <div className="max-w-2xl mx-auto text-center relative z-10">
                         <motion.div
                             initial={{ opacity: 0, y: 20 }}
                             whileInView={{ opacity: 1, y: 0 }}
@@ -22,17 +27,10 @@ const FooterCTA = () => {
                                 We don't pitch. We show.
                             </p>
                             <div className="flex flex-wrap justify-center gap-4">
-                                <Link
-                                    to="/orbit-crew"
-                                    className="inline-flex items-center gap-2 bg-white text-black px-7 py-3.5 text-sm font-medium hover:bg-white/90 transition-colors"
-                                >
-                                    Request Demo
-                                    <ArrowRight className="w-4 h-4" />
+                                <Link to="/orbit-crew" className="inline-flex items-center gap-2 bg-white text-black px-7 py-3.5 text-sm font-medium hover:bg-white/90 transition-colors">
+                                    Request Demo <ArrowRight className="w-4 h-4" />
                                 </Link>
-                                <Link
-                                    to="/infinity-canvas"
-                                    className="inline-flex items-center gap-2 border border-white/20 text-white px-7 py-3.5 text-sm font-medium hover:bg-white/5 transition-colors"
-                                >
+                                <Link to="/infinity-canvas" className="inline-flex items-center gap-2 border border-white/20 text-white px-7 py-3.5 text-sm font-medium hover:bg-white/5 transition-colors">
                                     Explore Infinite Canvas
                                 </Link>
                             </div>

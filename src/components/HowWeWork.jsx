@@ -29,9 +29,8 @@ const steps = [
 
 const HowWeWork = () => {
     return (
-        <section className="bg-black py-24 lg:py-32">
-            <div className="max-w-container mx-auto px-6 lg:px-10">
-                {/* Header */}
+        <section className="bg-black py-24 lg:py-32 relative overflow-hidden">
+            <div className="max-w-container mx-auto px-6 lg:px-10 relative z-10">
                 <motion.div
                     initial={{ opacity: 0, y: 20 }}
                     whileInView={{ opacity: 1, y: 0 }}
@@ -39,9 +38,7 @@ const HowWeWork = () => {
                     viewport={{ once: true }}
                     className="mb-20"
                 >
-                    <p className="text-muted text-xs uppercase tracking-widest mb-4">
-                        How We Work
-                    </p>
+                    <p className="text-muted text-xs uppercase tracking-widest mb-4">How We Work</p>
                     <h2 className="text-3xl md:text-4xl lg:text-5xl font-medium leading-tight max-w-3xl">
                         Find the Gap. Build the Fix.{' '}
                         <br />
@@ -49,10 +46,8 @@ const HowWeWork = () => {
                     </h2>
                 </motion.div>
 
-                {/* Divider */}
                 <div className="border-t border-white/10 mb-16" />
 
-                {/* 3 Columns */}
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-px bg-white/10">
                     {steps.map((step, i) => (
                         <motion.div
@@ -63,18 +58,12 @@ const HowWeWork = () => {
                             viewport={{ once: true }}
                             className="bg-black p-8 lg:p-10"
                         >
-                            <span className="text-dim text-xs font-medium block mb-6">
-                                {step.number}
-                            </span>
-                            <h3 className="text-white text-sm uppercase tracking-widest font-medium mb-6">
-                                {step.title}
-                            </h3>
+                            <span className="text-dim text-xs font-medium block mb-6">{step.number}</span>
+                            <h3 className="text-white text-sm uppercase tracking-widest font-medium mb-6">{step.title}</h3>
                             <div className="w-full h-px bg-white/10 mb-6" />
                             <div className="space-y-4">
                                 {step.paragraphs.map((p, j) => (
-                                    <p key={j} className="text-muted text-sm leading-relaxed">
-                                        {p}
-                                    </p>
+                                    <p key={j} className="text-muted text-sm leading-relaxed">{p}</p>
                                 ))}
                             </div>
                         </motion.div>
