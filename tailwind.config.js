@@ -7,13 +7,20 @@ export default {
     theme: {
         extend: {
             colors: {
-                background: "var(--color-bg)",
-                foreground: "var(--color-text)",
+                background: '#000000',
+                surface: '#0a0a0a',
+                border: '#1a1a1a',
+                foreground: '#ffffff',
+                muted: '#888888',
+                dim: '#555555',
             },
             fontFamily: {
-                sans: "var(--font-primary)",
-                cursive: "var(--font-cursive)",
-            }
+                sans: ['Poppins', 'sans-serif'],
+                cursive: ['Neulis Cursive', 'cursive'],
+            },
+            maxWidth: {
+                container: '1400px',
+            },
         },
     },
     plugins: [],

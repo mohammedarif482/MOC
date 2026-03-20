@@ -1,127 +1,194 @@
-import React from 'react';
-import { ArrowUpRight } from 'lucide-react';
-import { motion } from 'framer-motion';
+import { useState, useEffect } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { ArrowRight } from 'lucide-react';
+import { Link } from 'react-router-dom';
 import heroBg from '../assets/images/hero_bg.png';
 
-const Hero = () => {
+// Sliding number - whole number slides as one unit
+const SlidingNumber = ({ value }) => {
+    const formatted = value.toLocaleString();
     return (
-        <div
-            className="relative min-h-screen w-full overflow-hidden flex items-end pb-16"
-            style={{
-                backgroundImage: `url(${heroBg})`,
-                backgroundSize: 'cover',
-                backgroundPosition: 'center',
-                backgroundRepeat: 'no-repeat',
-            }}
-        >
-            {/* Gradient Overlay for Fade effect */}
-            <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent z-10" />
+        <span className="inline-block relative overflow-hidden align-baseline" style={{ height: '1.1em' }}>
+            <AnimatePresence mode="popLayout">
+                <motion.span
+                    key={formatted}
+                    initial={{ y: '100%' }}
+                    animate={{ y: '0%' }}
+                    exit={{ y: '-100%' }}
+                    transition={{ duration: 0.35, ease: [0.25, 0.1, 0.25, 1] }}
+                    className="block text-white font-medium"
+                >
+                    {formatted}
+                </motion.span>
+            </AnimatePresence>
+        </span>
+    );
+};
 
-            <div className="container relative z-20 mx-auto px-8 grid grid-cols-1 lg:grid-cols-2 gap-12 items-end">
+const getActiveUsers = () => {
+    const hour = new Date().getUTCHours();
 
-                {/* Left Content */}
-                <div className="space-y-8 pb-8">
-                    <motion.h1
+    // Simulate global active users based on overlapping work hours
+    // across major time zones (Americas, Europe, Asia-Pacific)
+    const hourlyActivity = [
+        620, 580, 540, 510, 490, 520,    // 00-05 UTC: Asia peak winding down
+        780, 1100, 1450, 1620, 1700, 1680, // 06-11 UTC: Europe peak + Asia overlap
+        1640, 1590, 1720, 1800, 1750, 1680, // 12-17 UTC: Americas peak + Europe overlap
+        1420, 1200, 1050, 920, 810, 700,  // 18-23 UTC: Americas winding down
+    ];
+
+    const base = hourlyActivity[hour];
+    // Add some randomness (+/- 8%)
+    const jitter = Math.floor(base * (0.92 + Math.random() * 0.16));
+    return jitter;
+};
+
+const Hero = () => {
+    const [activeUsers, setActiveUsers] = useState(getActiveUsers);
+
+    useEffect(() => {
+        const intervals = [3, 5, 2, 7, 15, 10]; // seconds
+        let idx = 0;
+        let timeout;
+
+        const tick = () => {
+            setActiveUsers(getActiveUsers());
+            timeout = setTimeout(tick, intervals[idx % intervals.length] * 1000);
+            idx++;
+        };
+
+        timeout = setTimeout(tick, intervals[0] * 1000);
+        return () => clearTimeout(timeout);
+    }, []);
+
+    return (
+        <section className="relative min-h-screen flex flex-col bg-black">
+            {/* Background image */}
+            <div className="absolute inset-0">
+                <img
+                    src={heroBg}
+                    alt=""
+                    className="w-full h-full object-cover"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-black/20" />
+            </div>
+
+            {/* Content */}
+            <div className="relative z-10 flex-1 flex items-center justify-center px-6 lg:px-10 pt-32 pb-20 lg:pb-28">
+                <div className="text-center max-w-4xl">
+                    <motion.div
                         initial={{ opacity: 0, y: 20 }}
                         animate={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 0.8 }}
-                        className="text-4xl md:text-5xl lg:text-6xl font-medium leading-tight"
+                        transition={{ duration: 0.6 }}
+                        className="inline-flex items-center gap-2.5 mb-6"
                     >
-                        Exploring the edges of <br />
-                        <span className="font-cursive italic text-white">curiosity</span>
+                        {/* Green blinking dot */}
+                        <span className="relative flex h-2 w-2">
+                            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75" />
+                            <span className="relative inline-flex rounded-full h-2 w-2 bg-green-500" />
+                        </span>
+                        <span className="text-muted text-sm uppercase tracking-widest">
+                            <SlidingNumber value={activeUsers} />
+                            {' '}USERS ACTIVE NOW ACROSS OUR PRODUCTS WORLDWIDE
+                        </span>
+                    </motion.div>
+
+                    <motion.h1
+                        initial={{ opacity: 0, y: 30 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.8, delay: 0.1 }}
+                        className="text-4xl md:text-6xl lg:text-7xl xl:text-8xl font-medium leading-[0.95] tracking-tight mb-8"
+                    >
+                        Exploring the
+                        <br />
+                        edges of{' '}
+                        <span className="font-cursive italic font-bold">
+                            curiosity
+                        </span>
                     </motion.h1>
 
                     <motion.p
                         initial={{ opacity: 0, y: 20 }}
                         animate={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 0.8, delay: 0.2 }}
-                        className="text-gray-300 max-w-md text-sm leading-relaxed"
+                        transition={{ duration: 0.6, delay: 0.3 }}
+                        className="text-muted text-base lg:text-lg max-w-xl mx-auto leading-relaxed mb-10"
                     >
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna, aliqua. Ut enim ad minim veniam.
+                        We build foundational software that transforms how organizations
+                        operate. From concept to deployment, we deliver solutions that matter.
                     </motion.p>
 
                     <motion.div
                         initial={{ opacity: 0, y: 20 }}
                         animate={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 0.8, delay: 0.4 }}
+                        transition={{ duration: 0.6, delay: 0.5 }}
+                        className="flex flex-wrap justify-center gap-4"
                     >
-                        <button className="bg-white text-black px-8 py-4 rounded-full font-medium flex items-center gap-2 hover:bg-opacity-90 transition-all text-sm">
-                            Connect Us Now
-                        </button>
-                    </motion.div>
-                </div>
-
-                {/* Right Content - Two Cards */}
-                <div className="flex flex-col items-end space-y-4">
-                    {/* Top Card - Made Of Curiosity */}
-                    <motion.div
-                        initial={{ opacity: 0, x: 20 }}
-                        animate={{ opacity: 1, x: 0 }}
-                        transition={{ duration: 0.8, delay: 0.6 }}
-                        className="w-full max-w-sm p-6 rounded-3xl"
-                        style={{
-                            backgroundColor: 'rgba(118, 89, 249, 0.16)',
-                            border: '1px solid rgba(118, 89, 249, 0.5)',
-                            backdropFilter: 'blur(31px)',
-                            WebkitBackdropFilter: 'blur(31px)',
-                        }}
-                    >
-                        <h3 className="font-cursive text-2xl italic text-white mb-3">Made Of Curiosity</h3>
-                        <p className="text-sm text-gray-200 leading-relaxed">
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                        </p>
-                    </motion.div>
-
-                    {/* Bottom Card - Brands */}
-                    <motion.div
-                        initial={{ opacity: 0, x: 20 }}
-                        animate={{ opacity: 1, x: 0 }}
-                        transition={{ duration: 0.8, delay: 0.8 }}
-                        className="w-full max-w-sm p-4 rounded-full"
-                        style={{
-                            backgroundColor: 'rgba(118, 89, 249, 0.16)',
-                            border: '1px solid rgba(118, 89, 249, 0.5)',
-                            backdropFilter: 'blur(31px)',
-                            WebkitBackdropFilter: 'blur(31px)',
-                        }}
-                    >
-                        <div className="flex items-center gap-3">
-                            {/* Brand logos */}
-                            <div className="flex items-center -space-x-2">
-                                {/* Instance */}
-                                <div className="w-12 h-12 rounded-full bg-purple-400/80 flex items-center justify-center text-white text-[10px] font-medium z-10">
-                                    Instance
-                                </div>
-                                {/* QComm */}
-                                <div className="w-12 h-12 rounded-full bg-green-700 flex items-center justify-center z-20">
-                                    <div className="w-6 h-6 border-2 border-green-300 rounded-full"></div>
-                                </div>
-                                {/* INES */}
-                                <div className="w-12 h-12 rounded-full bg-gradient-to-br from-pink-500 to-blue-500 flex items-center justify-center z-30">
-                                    <span className="text-white text-[8px] font-bold">INES<br /><span className="text-[6px]">CLAYHAUS</span></span>
-                                </div>
-                                {/* Star logo */}
-                                <div className="w-12 h-12 rounded-full bg-gradient-to-br from-green-300 via-yellow-200 to-blue-300 flex items-center justify-center z-40">
-                                    <svg className="w-5 h-5 text-white" viewBox="0 0 24 24" fill="currentColor">
-                                        <path d="M12 2C13.5 6 18 6.5 18 6.5C18 6.5 13.5 7 12 11C10.5 7 6 6.5 6 6.5C6 6.5 10.5 6 12 2Z" />
-                                        <path d="M12 13C13 15.5 16 16 16 16C16 16 13 16.5 12 19C11 16.5 8 16 8 16C8 16 11 15.5 12 13Z" />
-                                    </svg>
-                                </div>
-                            </div>
-
-                            {/* Stats */}
-                            <div className="flex items-center gap-2 ml-auto">
-                                <div className="text-right">
-                                    <p className="text-white text-sm font-medium">4+ Products Shipped</p>
-                                    <p className="text-white text-sm font-medium">31K+ Users</p>
-                                </div>
-                                <ArrowUpRight className="w-5 h-5 text-white" />
-                            </div>
-                        </div>
+                        <Link
+                            to="/infinity-canvas"
+                            className="inline-flex items-center gap-2 bg-white text-black px-7 py-3.5 text-sm font-medium hover:bg-white/90 transition-colors"
+                        >
+                            Infinite Canvas
+                            <ArrowRight className="w-4 h-4" />
+                        </Link>
+                        <Link
+                            to="/orbit-crew"
+                            className="inline-flex items-center gap-2 bg-transparent text-white px-7 py-3.5 text-sm font-medium hover:bg-white hover:text-black border border-white/30 transition-colors"
+                        >
+                            Request Demo
+                        </Link>
                     </motion.div>
                 </div>
             </div>
-        </div>
+
+            {/* Scroll to explore */}
+            <div className="relative z-10 flex flex-col items-center pb-6">
+                <motion.div
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    transition={{ duration: 0.6, delay: 0.8 }}
+                    className="flex flex-col items-center gap-2"
+                >
+                    <p className="text-xs text-dim uppercase tracking-widest">
+                        Scroll to explore
+                    </p>
+                    <motion.div
+                        animate={{ y: [0, 6, 0] }}
+                        transition={{ duration: 1.5, repeat: Infinity, ease: 'easeInOut' }}
+                    >
+                        <svg width="16" height="24" viewBox="0 0 16 24" fill="none" className="text-dim">
+                            <path d="M7.29 16.71a1 1 0 001.42 0l4-4a1 1 0 00-1.42-1.42L8 14.59l-3.29-3.3a1 1 0 00-1.42 1.42l4 4z" fill="currentColor" />
+                            <path d="M7.29 10.71a1 1 0 001.42 0l4-4a1 1 0 00-1.42-1.42L8 8.59 4.71 5.29a1 1 0 00-1.42 1.42l4 4z" fill="currentColor" opacity="0.4" />
+                        </svg>
+                    </motion.div>
+                </motion.div>
+            </div>
+
+            {/* Bottom stats bar */}
+            <div className="relative z-10 border-t border-white/10">
+                <div className="max-w-container mx-auto px-6 lg:px-10 py-5 flex flex-wrap justify-between items-center gap-4">
+                    <div className="flex items-center gap-8">
+                        <div>
+                            <p className="text-2xl font-semibold text-white">4+</p>
+                            <p className="text-xs text-muted uppercase tracking-wider">Products</p>
+                        </div>
+                        <div className="w-px h-8 bg-white/10" />
+                        <div>
+                            <p className="text-2xl font-semibold text-white">31K+</p>
+                            <p className="text-xs text-muted uppercase tracking-wider">Users</p>
+                        </div>
+                        <div className="w-px h-8 bg-white/10" />
+                        <div>
+                            <p className="text-2xl font-semibold text-white">50+</p>
+                            <p className="text-xs text-muted uppercase tracking-wider">Sectors</p>
+                        </div>
+                    </div>
+                    <div className="text-right">
+                        <p className="text-2xl font-semibold text-white">3</p>
+                        <p className="text-xs text-muted uppercase tracking-wider">Active Researches</p>
+                    </div>
+                </div>
+            </div>
+        </section>
     );
 };
 

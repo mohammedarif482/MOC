@@ -1,62 +1,60 @@
-import React from 'react';
 import { motion } from 'framer-motion';
 
 const PageHeader = ({ subtitle, title, backgroundImage, icon }) => {
     return (
-        <div
-            className="relative min-h-[40vh] w-full flex items-end pb-6 overflow-hidden"
-        >
-            {/* Background Image - positioned absolute */}
-            <div
-                className="absolute top-0 right-0 w-full h-full z-0"
-                style={{
-                    backgroundImage: `url(${backgroundImage})`,
-                    backgroundSize: 'auto 80vh',
-                    backgroundPosition: 'top right',
-                    backgroundRepeat: 'no-repeat',
-                    maskImage: 'linear-gradient(to right, transparent 0%, black 50%)',
-                    WebkitMaskImage: 'linear-gradient(to right, transparent 0%, black 50%)',
-                }}
-            />
+        <section className="relative min-h-[50vh] lg:min-h-[60vh] flex items-end overflow-hidden">
+            {/* Background Image */}
+            {backgroundImage && (
+                <div className="absolute inset-0">
+                    <img
+                        src={backgroundImage}
+                        alt=""
+                        className="w-full h-full object-cover"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black via-black/60 to-black/30" />
+                    <div className="absolute inset-0 bg-gradient-to-r from-black/80 to-transparent" />
+                </div>
+            )}
 
-            {/* Gradient Overlay */}
-            <div className="absolute inset-0 bg-gradient-to-r from-black via-black/80 to-transparent z-10" />
-
-            <div className="container relative z-20 mx-auto px-8 w-full">
-                <div className="flex justify-between items-end mb-2">
-                    <motion.div
-                        initial={{ opacity: 0, y: 20 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 0.8 }}
-                    >
-                        <p className="text-gray-400 text-sm mb-1">{subtitle}</p>
-                        <h1 className="text-4xl md:text-5xl lg:text-6xl font-medium">
-                            <span className="font-cursive italic text-white">{title}</span>
-                        </h1>
-                    </motion.div>
-
-                    {/* Icon - absolute positioned to the right */}
-                    {icon && (
+            {/* Content */}
+            <div className="relative z-10 w-full">
+                <div className="max-w-container mx-auto px-6 lg:px-10 pb-12 lg:pb-16">
+                    <div className="flex items-end justify-between gap-6">
                         <motion.div
-                            initial={{ opacity: 0, scale: 0.8 }}
-                            animate={{ opacity: 1, scale: 1 }}
-                            transition={{ duration: 0.8, delay: 0.2 }}
-                            className="bg-[#1a1a2e]/80 backdrop-blur-md p-3 rounded-2xl border border-white/10 hidden md:block mb-1"
+                            initial={{ opacity: 0, y: 20 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            transition={{ duration: 0.6 }}
                         >
-                            <img src={icon} alt={`${title} Icon`} className="w-8 h-8" />
+                            <p className="text-muted text-xs uppercase tracking-widest mb-3">
+                                {subtitle}
+                            </p>
+                            <h1 className="text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-medium leading-[0.95] tracking-tight">
+                                <span className="font-cursive italic">{title}</span>
+                            </h1>
                         </motion.div>
-                    )}
+
+                        {icon && (
+                            <motion.div
+                                initial={{ opacity: 0 }}
+                                animate={{ opacity: 1 }}
+                                transition={{ duration: 0.6, delay: 0.2 }}
+                                className="hidden md:flex items-center justify-center w-12 h-12 border border-white/10 shrink-0"
+                            >
+                                <img src={icon} alt="" className="w-5 h-5 opacity-60" />
+                            </motion.div>
+                        )}
+                    </div>
                 </div>
 
-                {/* Divider Line - Full width, no fade */}
+                {/* Divider */}
                 <motion.div
                     initial={{ scaleX: 0 }}
                     animate={{ scaleX: 1 }}
                     transition={{ duration: 0.8, delay: 0.3 }}
-                    className="h-[1px] bg-white/20 origin-left w-full"
+                    className="h-px bg-white/10 origin-left"
                 />
             </div>
-        </div>
+        </section>
     );
 };
 
