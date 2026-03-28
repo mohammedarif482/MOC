@@ -183,11 +183,11 @@ function generatePage(route) {
         `<meta name="twitter:description" content="${route.description}"`
     );
 
-    // Inject static content inside the root div for crawlers
-    // This content is replaced by React hydration on JS-capable browsers
+    // Replace the static-content block with route-specific content
+    // This sits outside #root so crawlers always see it. React removes it on load.
     html = html.replace(
-        '<div id="root">',
-        `<div id="root"><div class="crawler-content" style="background:#000;color:#fff;font-family:system-ui,sans-serif;padding:4rem 2rem;max-width:800px;margin:0 auto">${route.content}<p style="margin-top:2rem;color:#666;font-size:0.875rem">Made of Curiosity — madeofcuriosity.com</p></div>`
+        /<main id="static-content">[\s\S]*?<\/main>/,
+        `<main id="static-content"><article>${route.content}</article></main>`
     );
 
     // Write to dist
