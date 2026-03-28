@@ -4,10 +4,58 @@
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Made Of Curiosity</title>
+    <title>Made Of Curiosity — Research-Led Product House</title>
+    <meta name="description" content="Made of Curiosity is a research-led product house. We find what's broken, build the fix, and prove it with data. Exploring the edges of curiosity." />
+    <meta name="keywords" content="Made of Curiosity, MOC, research, product house, data, metrics, Visualize, Vines, curiosity" />
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Made Of Curiosity — Research-Led Product House" />
+    <meta property="og:description" content="We find what's broken, build the fix, and prove it with data. Exploring the edges of curiosity." />
+    <meta property="og:site_name" content="Made of Curiosity" />
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Made Of Curiosity — Research-Led Product House" />
+    <meta name="twitter:description" content="We find what's broken, build the fix, and prove it with data. Exploring the edges of curiosity." />
+
+    <!-- Structured Data -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "name": "Made of Curiosity",
+      "description": "A research-led product house. We find what's broken, build the fix, and prove it with data.",
+      "url": "https://madeofcuriosity.com",
+      "foundingDate": "2026",
+      "knowsAbout": ["Product Development", "Data Analytics", "Research", "SaaS"],
+      "sameAs": []
+    }
+    </script>
   </head>
   <body>
-    <div id="root"></div>
+    <div id="root">
+      <!--
+        Fallback content for crawlers and bots that cannot execute JavaScript.
+        This is replaced by React on load.
+      -->
+      <noscript>
+        <div style="background:#000;color:#fff;font-family:sans-serif;padding:4rem 2rem;text-align:center">
+          <h1>Made of Curiosity</h1>
+          <p>We are a research-led product house. We find what's broken, build the fix, and prove it with data.</p>
+          <nav>
+            <a href="/home" style="color:#9ca3af;margin:0 1rem">Home</a>
+            <a href="/offerings" style="color:#9ca3af;margin:0 1rem">Offerings</a>
+            <a href="/mission-studies" style="color:#9ca3af;margin:0 1rem">Mission Studies</a>
+            <a href="/the-observatory" style="color:#9ca3af;margin:0 1rem">Observatory</a>
+            <a href="/the-signal" style="color:#9ca3af;margin:0 1rem">The Signal</a>
+            <a href="/impact-studies" style="color:#9ca3af;margin:0 1rem">Impact Studies</a>
+            <a href="/the-commons" style="color:#9ca3af;margin:0 1rem">The Commons</a>
+            <a href="/careers" style="color:#9ca3af;margin:0 1rem">Careers</a>
+          </nav>
+        </div>
+      </noscript>
+    </div>
     <script type="module" src="/src/main.jsx"></script>
   </body>
 </html>
