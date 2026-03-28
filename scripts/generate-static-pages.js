@@ -146,6 +146,27 @@ const routes = [
             <p>Where ideas take shape before they become products.</p>
         `,
     },
+    {
+        path: '/products',
+        title: 'Products — Made Of Curiosity',
+        description: 'Data-driven SaaS products by Made of Curiosity. Visualize for business diagnostics, Vines for Instagram content intelligence, and QComm for quick commerce.',
+        content: `
+            <h1>Our Products</h1>
+            <p>Tools that don't just show data. They read it. We build in one niche deliberately — data-driven, analytical, diagnostic.</p>
+
+            <h2>Visualize — Business Diagnostics. Not Just Tracking.</h2>
+            <p>Know exactly where your business is leaking. Cross-department KPI tracking, AI-powered insights, built for founders who need clarity — not more noise. Most businesses collect data but cannot name their three most important metrics. Visualize forces that clarity. Track what matters, ignore everything else, and act on the numbers that actually move your business.</p>
+            <p>Status: Live</p>
+
+            <h2>Vines — Grow on Instagram With Proof. Not Guesswork.</h2>
+            <p>Content intelligence for Instagram. Analyze your past content, benchmark competitors, get data-backed ideas, hooks, and scripts that have a reason to work. We tracked 150 brand accounts that post daily — after six months, 82% saw engagement flatline. Posting is not a strategy. Signal is. Vines finds the signal.</p>
+            <p>Status: Live</p>
+
+            <h2>QComm — Quick Commerce Infrastructure. White-Labelled.</h2>
+            <p>Built for local businesses that want fast delivery without rebuilding their entire operation. Plugs into existing billing software. Ships fast. No bloated marketplace dependency. Your store, your customers, your delivery — just faster.</p>
+            <p>Status: In Development</p>
+        `,
+    },
 ];
 
 function generatePage(route) {

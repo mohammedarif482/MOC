@@ -17,6 +17,7 @@ import Maintenance from './pages/Maintenance';
 import CuriosityStation from './pages/CuriosityStation';
 import JobDetails from './pages/JobDetails';
 import Careers from './pages/Careers';
+import Products from './pages/Products';
 import NotFound from './pages/NotFound';
 import MissionStudyArticle from './pages/inner/MissionStudyArticle';
 import ObservatoryEssay from './pages/inner/ObservatoryEssay';
@@ -47,6 +48,7 @@ function AppContent() {
                 <Route path="/impact-studies" element={<ImpactStudies />} />
                 <Route path="/the-commons" element={<TheCommons />} />
                 <Route path="/offerings" element={<Offerings />} />
+                <Route path="/products" element={<Products />} />
                 <Route path="/documentations" element={<Documentations />} />
                 <Route path="/orbit-crew" element={<OrbitCrew />} />
                 <Route path="/mission-studies/:slug" element={<MissionStudyArticle />} />
